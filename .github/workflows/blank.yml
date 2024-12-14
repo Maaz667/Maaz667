@@ -3,7 +3,7 @@ name: CI/CD for Node.js App
 on:
   push:
     branches:
-      - main  # Trigger workflow on pushes to the main branch
+      - main # Trigger workflow on pushes to the main branch
 
 jobs:
   build-and-push:
@@ -24,17 +24,16 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
-          context: .
+          context: .  # Set the build context to the root of the repo
+          dockerfile: Dockerfile  # Explicitly specify the Dockerfile
           push: true
           tags: maaz648/awesome_brattain:latest
 
   deploy:
     runs-on: ubuntu-latest
-    needs: build-and-push
+    needs: build-and-push  # Run after the build-and-push job
     steps:
       - name: Deploy to Server
         run: |
           echo "Deploying container to production..."
-          ssh username@your-server-ip "docker pull maaz648/awesome_brattain:latest && docker run -d -p 80:3000 maaz648/awesome_brattain:latest"
-
-
+          # Add your deployment commands here (e.g., SSH to server and run Docker commands)
