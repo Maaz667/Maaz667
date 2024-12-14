@@ -13,11 +13,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Debugging: List files in the repository to confirm Dockerfile location
-      - name: List files for debugging
-        run: |
-          ls -l
-
       # Step 2: Log in to Docker Hub
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
@@ -32,7 +27,7 @@ jobs:
           context: .  # Set the build context to the root of the repo
           dockerfile: Dockerfile  # Explicitly specify the Dockerfile
           push: true
-          tags: maaz648/nodejs-container-app:latest  # Change this tag
+          tags: maaz648/nodejs-container-app:latest  # Updated to the correct image tag
 
   deploy:
     runs-on: ubuntu-latest
@@ -42,4 +37,5 @@ jobs:
         run: |
           echo "Deploying container to production..."
           ssh username@your-server-ip "docker pull maaz648/nodejs-container-app:latest && docker run -d -p 80:3000 maaz648/nodejs-container-app:latest"
-          # Add your deployment commands here (e.g., SSH to server and run Docker commands)
+          # Replace `username@your-server-ip` with your actual SSH credentials
+          # Add additional deployment commands if needed
