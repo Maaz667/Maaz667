@@ -25,7 +25,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .  # Set the build context to the root of the repo
-          dockerfile: Dockerfile  # Explicitly specify the Dockerfile
+          dockerfile: dockerfile  # Point to the new lowercase Dockerfile name
           push: true
           tags: maaz648/nodejs-container-app:latest  # Updated to the correct image tag
 
@@ -38,4 +38,3 @@ jobs:
           echo "Deploying container to production..."
           ssh username@your-server-ip "docker pull maaz648/nodejs-container-app:latest && docker run -d -p 80:3000 maaz648/nodejs-container-app:latest"
           # Replace `username@your-server-ip` with your actual SSH credentials
-          # Add additional deployment commands if needed
